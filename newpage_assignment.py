@@ -74,21 +74,6 @@ import pandas as pd
         2        |2021/01/01 |  Site 2 | 5          |  3              | 6                | 3      |      0.1
 '''
 
-# class SitesData:
-#     def __init__(
-#         self,
-#         file_path: str,
-#         sheet_name: str,
-#         engine: str='openpyxl',
-#         header=None
-#     ):
-#         self.dataframe = pd.read_excel(
-#             io=file_path,
-#             sheet_name=sheet_name,
-#             engine=engine,
-#             header=header
-#         )
-
 class SitesData:
     def __init__(
         self,
@@ -124,7 +109,7 @@ class SitesData:
 
             transformed_data = pd.DataFrame({
                 'Day of Month': days_of_month[:days_count],
-                'Date': dates[:days_count],
+                # 'Date': dates[:days_count],
                 'Site ID': [site_mame]*days_count,
                 'Page Views': list(site_numbers_dict.values())[:days_count],
                 'Unique Visitors': list(site_numbers_dict.values())[days_count:days_count*2],
@@ -137,15 +122,14 @@ class SitesData:
         return pd.concat(sites)
 
     def number_of_sites(self) -> int:
-        self.dataframe.to_excel('xxxxx.xlsx')
         column_items = list(self.dataframe.iloc[3:,0])
-        # print('column_items', column_items)
         cols = [str(site) for site in column_items if str(site)!='nan']
         return len(cols)
 
     def days_count_between_dates(self) -> int:
         start_date = self.dataframe.iloc[0,0]
         end_date = self.dataframe.iloc[1,0]
+
         delta = end_date - start_date
         return delta.days + 1
 
