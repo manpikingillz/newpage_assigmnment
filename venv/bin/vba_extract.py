@@ -1,4 +1,4 @@
-#!/home/bposeats/work/personal/newpage_assignment/venv/bin/python3.10
+#!/Users/gilbert/work/personal/newpage_assigmnment/venv/bin/python3.10
 
 ##############################################################################
 #
