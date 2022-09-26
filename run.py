@@ -11,4 +11,4 @@ df = pd.read_excel(
 sites_data = SitesData(
     dataframe=df
 )
-sites_data.convert_dataframe_to_excel('Output.xlsx')
+sites_data.convert_dataframe_to_excel('Output Report.xlsx')
