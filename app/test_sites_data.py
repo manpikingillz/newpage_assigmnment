@@ -72,7 +72,11 @@ def sites_data():
     with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
         df.to_excel(writer, sheet_name='sheet1', index=False)
 
-    xlsx_dataframe = pd.read_excel(output, sheet_name='sheet1', engine='openpyxl')
+    xlsx_dataframe = pd.read_excel(
+        output,
+        sheet_name='sheet1',
+        engine='openpyxl'
+    )
     xlsx_dataframe.columns = range(df.shape[1])
 
     return SitesData(dataframe=xlsx_dataframe)
@@ -83,24 +87,31 @@ def test_number_of_sites(sites_data):
 
 
 def test_days_count_between_dates(sites_data):
-    start_date = sites_data.dataframe.iloc[0,0]
-    end_date = sites_data.dataframe.iloc[1,0]
+    start_date = sites_data.dataframe.iloc[0, 0]
+    end_date = sites_data.dataframe.iloc[1, 0]
     delta = end_date - start_date
     assert delta.days == 1
+
 
 def test_transform_data(sites_data):
     date1 = '2021/01/01'
     date2 = '2021/01/02'
 
     expected_transformed_dataframe = pd.DataFrame({
-                'Day of Month': [1,2,1,2,1,2],
+                'Day of Month': [1, 2, 1, 2, 1, 2],
                 'Date': [date1, date2, date1, date2, date1, date2],
-                'Site ID': ['Site 1', 'Site 1', 'Site 2', 'Site 2', 'Site 3', 'Site 3'],
-                'Page Views': ['6','4','4','5','4','4'],
-                'Unique Visitors': ['4','2','2','3','2','2'],
+                'Site ID': ['Site 1', 'Site 1',
+                            'Site 2', 'Site 2',
+                            'Site 3', 'Site 3'],
+                'Page Views': ['6', '4', '4', '5', '4', '4'],
+                'Unique Visitors': ['4', '2', '2', '3', '2', '2'],
                 'Total Time Spent': ['11', '14', '5', '6', '8', '8'],
-                'Visits': ['4','2','2','3','2','2'],
-                'Average Time Spent on Site': ['0.1','0.1','0','0.1','0.1','0.1']
+                'Visits': ['4', '2', '2', '3', '2', '2'],
+                'Average Time Spent on Site': ['0.1', '0.1', '0',
+                                               '0.1', '0.1', '0.1']
             })
 
-    assert_frame_equal(expected_transformed_dataframe.reset_index(drop=True), sites_data.transform_data().reset_index(drop=True))
+    assert_frame_equal(
+        expected_transformed_dataframe.reset_index(drop=True),
+        sites_data.transform_data().reset_index(drop=True)
+        )

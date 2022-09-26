@@ -1,5 +1,5 @@
 ## Purpose of the Project
-This project's purpose is to transform data provided in an excel document. 
+This project's purpose is to transform data provided in an excel document to a report
 
 ## Expected input and output
 - The expected input is an excel document with a sheet that contains that needs to be transformed.
