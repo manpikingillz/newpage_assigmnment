@@ -109,7 +109,7 @@ class SitesData:
 
             transformed_data = pd.DataFrame({
                 'Day of Month': days_of_month[:days_count],
-                # 'Date': dates[:days_count],
+                'Date': dates[:days_count],
                 'Site ID': [site_mame]*days_count,
                 'Page Views': list(site_numbers_dict.values())[:days_count],
                 'Unique Visitors': list(site_numbers_dict.values())[days_count:days_count*2],
