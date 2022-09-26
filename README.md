@@ -13,6 +13,7 @@ This project's purpose is to transform data provided in an excel document, to a 
 - Activate virtual environment `source venv/bin/activate`. Once in the virtual environment, executing `python --version` should show `python 3.10.x`
 - Install project dependencies - `pip install -r requirements.txt`
 - To run the app, execute the command `python run.py`
+- The outcome of running the program is a file - `Output Report.xlsx`. If you already have this file in your directory, delete it first, run the program and the file should be produced by the program.
 - To run the tests, execute - `pytest`
 
 ## Use cases and edge cases covered in the code.
