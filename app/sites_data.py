@@ -1,4 +1,3 @@
-from datetime import datetime
 import pandas as pd
 
 
@@ -33,7 +32,7 @@ class SitesData:
             days_count = self.days_count_between_dates()
 
             days_of_month = [date.day for date in site_date_dict.values()]
-            dates = [date.strftime("%Y-%m-%d") for date in site_date_dict.values()]
+            dates = [date.strftime("%Y/%m/%d") for date in site_date_dict.values()]
 
             transformed_data = pd.DataFrame({
                 'Day of Month': days_of_month[:days_count],

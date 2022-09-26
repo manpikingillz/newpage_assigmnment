@@ -3,15 +3,13 @@ import pytest
 import pandas as pd
 from pandas.testing import assert_frame_equal
 import io
-import mock
-
 from sites_data import SitesData
 
 
 @pytest.fixture
 def sites_data():
-    date1 = datetime.strptime('2021-01-01', '%Y-%m-%d')
-    date2 = datetime.strptime('2021-01-02', '%Y-%m-%d')
+    date1 = datetime.strptime('2021/01/01', '%Y/%m/%d')
+    date2 = datetime.strptime('2021/01/02', '%Y/%m/%d')
 
     df = pd.DataFrame({
         'column1': [
@@ -81,21 +79,18 @@ def sites_data():
 
 
 def test_number_of_sites(sites_data):
-    # Test case to test that number of sites is correct'
     sites_data.number_of_sites() == 3
 
 
 def test_days_count_between_dates(sites_data):
-    # Test case to test days count between dates
     start_date = sites_data.dataframe.iloc[0,0]
     end_date = sites_data.dataframe.iloc[1,0]
     delta = end_date - start_date
     assert delta.days == 1
 
 def test_transform_data(sites_data):
-    # Test case to test that data will be transformed correctly.
-    date1 = '2021-01-01'
-    date2 = '2021-01-02'
+    date1 = '2021/01/01'
+    date2 = '2021/01/02'
 
     expected_transformed_dataframe = pd.DataFrame({
                 'Day of Month': [1,2,1,2,1,2],
