@@ -74,22 +74,27 @@ import pandas as pd
         2        |2021/01/01 |  Site 2 | 5          |  3              | 6                | 3      |      0.1
 '''
 
-
+# class SitesData:
+#     def __init__(
+#         self,
+#         file_path: str,
+#         sheet_name: str,
+#         engine: str='openpyxl',
+#         header=None
+#     ):
+#         self.dataframe = pd.read_excel(
+#             io=file_path,
+#             sheet_name=sheet_name,
+#             engine=engine,
+#             header=header
+#         )
 
 class SitesData:
     def __init__(
         self,
-        file_path:str,
-        sheet_name: str,
-        engine:str='openpyxl',
-        header=None
+        dataframe: pd.DataFrame
     ):
-        self.dataframe = pd.read_excel(
-            io=file_path,
-            sheet_name=sheet_name,
-            engine=engine,
-            header=header
-        )
+        self.dataframe = dataframe
 
     def transform_data(self) -> pd.DataFrame:
         row_counter = 0
@@ -132,7 +137,9 @@ class SitesData:
         return pd.concat(sites)
 
     def number_of_sites(self) -> int:
+        self.dataframe.to_excel('xxxxx.xlsx')
         column_items = list(self.dataframe.iloc[3:,0])
+        # print('column_items', column_items)
         cols = [str(site) for site in column_items if str(site)!='nan']
         return len(cols)
 
@@ -142,13 +149,19 @@ class SitesData:
         delta = end_date - start_date
         return delta.days + 1
 
-    def convert_dataframe_to_excel(self, output_file: str):
+    def convert_dataframe_to_excel(self, output_file: str) -> None:
         transformed_data = self.transform_data()
         transformed_data.to_excel(output_file, index=False)
 
+
+df = pd.read_excel(
+            io='Test Excel.xlsx',
+            sheet_name='Sheet2',
+            engine='openpyxl',
+            header=None
+        )
 sites_data = SitesData(
-    file_path='Test Excel.xlsx',
-    sheet_name='Sheet2',
+    dataframe=df
 )
 sites_data.convert_dataframe_to_excel('Output.xlsx')
 
